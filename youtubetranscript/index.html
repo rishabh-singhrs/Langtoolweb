@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Transcript Fetcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('gojo.png');
+            background-size: cover;
+            background-position: top;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center;
+            height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 40%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        form input {
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: #e9e9e9;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #007BFF;
+        }.iconlogo {
+            width: 100px; /* Adjust the size of the icon */
+            height: 100px; /* Adjust the size of the icon */
+        }.home-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+<div><img src="icon.png" class="iconlogo"></div>
+<div class="container">
+    <h1>YouTube Transcript Fetcher</h1>
+    <form id="urlForm">
+        <label for="url">Enter YouTube Video URL:</label>
+        <input type="text" id="url" name="url" placeholder="https://www.youtube.com/watch?v=..." required>
+        <button type="submit">Get Transcript</button>
+    </form>
+
+    <div id="loading">Loading transcript...</div>
+    <div id="error" class="error"></div>
+    <pre id="transcript"></pre>
+    <button class="home-button" onclick="goHome()">Home</button>
+</div>
+
+<script>
+    document.getElementById('urlForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const url = document.getElementById('url').value;
+        const errorDiv = document.getElementById('error');
+        const loadingDiv = document.getElementById('loading');
+        const transcriptDiv = document.getElementById('transcript');
+
+        // Reset error and transcript fields
+        errorDiv.textContent = '';
+        transcriptDiv.textContent = '';
+
+        // Show loading spinner
+        loadingDiv.style.display = 'block';
+
+        // Send URL to Flask backend
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadingDiv.style.display = 'none';
+            if (data.transcript) {
+                transcriptDiv.textContent = data.transcript;
+            } else if (data.error) {
+                errorDiv.textContent = 'Error: ' + data.error;
+            }
+        })
+        .catch(error => {
+            loadingDiv.style.display = 'none';
+            errorDiv.textContent = 'Error: Could not fetch transcript. Please try again later.';
+        });
+    });
+    function goHome() {
+            window.history.back();
+        }
+</script>
+
+</body>
+</html>
