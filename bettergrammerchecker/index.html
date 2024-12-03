@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Checker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+      overflow-x: hidden;
+      flex-direction: column;
+      background-image: url(gojo.png);
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      resize: none;
+      transition: border-color 0.3s ease;
+    }
+
+    textarea:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Pulsating effect for the button */
+        button:active {
+            animation: pulsate 1s ease-out;
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+    /* Modal (Popup) styles */
+    #errorModal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Black with transparency */
+      overflow: auto; /* Enable scroll if needed */
+      padding-top: 60px;
+    }
+
+    #modalContent {
+      background-color: #f9f9f9;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: #333;
+    }
+
+    .close {
+      font-size: 25px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+    }
+
+    #errorList {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #errorList li {
+      background-color: #ffe5e5;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .error-message {
+      font-weight: bold;
+      color: #f44336;
+    }
+
+    .error-context {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .error-suggestions {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #4CAF50;
+    }
+
+    .no-errors {
+      font-size: 1.2rem;
+      color: #4CAF50;
+    }
+
+    .loading {
+      font-size: 1.2rem;
+      color: #333;
+      font-style: italic;
+      margin-top: 20px;
+
+    }
+    .iconlogo{
+      height: 100px;
+      width: 100px;
+    }
+    .home-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;}
+
+  </style>
+</head>
+<body>
+  <div><img src="icon.png" class="iconlogo"></div>
+  <div class="container">
+    <h1>Grammar Checker</h1>
+
+    <textarea id="textInput" placeholder="Enter your text here..." rows="10"></textarea>
+    
+    <button onclick="checkGrammar()">Check Grammar</button>
+    <button class="home-button" onclick="goHome()">Home</button>
+  </div>
+
+  <!-- Modal (Popup) for errors -->
+  <div id="errorModal">
+    <div id="modalContent">
+      <div class="modal-header">
+        <h2>Grammar Suggestions</h2>
+        <button class="close" id="closeModal">&times;</button>
+      </div>
+      <div class="loading" id="loadingMessage" style="display:none;">Checking your text...</div>
+      <ul id="errorList"></ul>
+    </div>
+  </div>
+
+  <script>
+    async function checkGrammar() {
+      // Get the text from the textarea
+      const text = document.getElementById("textInput").value;
+      const loadingMessage = document.getElementById("loadingMessage");
+
+      // Show loading message while checking grammar
+      loadingMessage.style.display = 'block';
+      document.getElementById('errorList').innerHTML = ''; // Clear previous results
+
+      // If the text is empty, show an alert
+      if (!text.trim()) {
+        alert("Please enter some text.");
+        loadingMessage.style.display = 'none';
+        return;
+      }
+
+      // Prepare the API endpoint and data
+      const apiUrl = "https://api.languagetool.org/v2/check";
+      const data = {
+        text: text,
+        language: "en-US"
+      };
+
+      try {
+        // Send the request to LanguageTool API (no API key needed)
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams(data)
+        });
+
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error("Error: " + response.statusText);
+        }
+
+        const result = await response.json();
+        loadingMessage.style.display = 'none'; // Hide loading message after response
+
+        // Display the results in the modal
+        displayResults(result.matches);
+
+        // Show the modal
+        document.getElementById('errorModal').style.display = 'block';
+
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while checking the grammar.");
+        loadingMessage.style.display = 'none'; // Hide loading message on error
+      }
+    }
+
+    function displayResults(matches) {
+      const errorList = document.getElementById("errorList");
+
+      // Clear previous results
+      errorList.innerHTML = "";
+
+      // Limit to the first 10 errors
+      const topMatches = matches.slice(0, 10);
+
+      if (topMatches.length === 0) {
+        errorList.innerHTML = "<li class='no-errors'>No grammar issues found!</li>";
+      } else {
+        // Iterate over the top 10 matches and create list items for each grammar issue
+        topMatches.forEach((match) => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `
+            <div class="error-message">${match.message}</div>
+            <div class="error-context">Context: "${match.context.text}"</div>
+            <div class="error-suggestions">Suggestion: ${match.replacements.map(rep => rep.value).join(', ')}</div>
+          `;
+          errorList.appendChild(listItem);
+        });
+      }
+
+      // If there were more than 10 errors, show a message
+      if (matches.length > 10) {
+        const moreErrorsMessage = document.createElement("li");
+        moreErrorsMessage.classList.add("no-errors");
+        moreErrorsMessage.innerText = "Only the top 10 grammar issues are shown.";
+        errorList.appendChild(moreErrorsMessage);
+      }
+    }
+
+    // Close the modal when the "X" button is clicked
+    document.getElementById("closeModal").onclick = function() {
+      document.getElementById("errorModal").style.display = "none";
+    };
+
+    // Close the modal if the user clicks outside the modal content
+    window.onclick = function(event) {
+      if (event.target == document.getElementById("errorModal")) {
+        document.getElementById("errorModal").style.display = "none";
+      }
+    };
+    function goHome() {
+            window.history.back();
+        }
+  </script>
+
+</body>
+</html>
