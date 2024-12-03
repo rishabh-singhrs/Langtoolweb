@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            background-image: url('gojo.png'); /* Add the background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-attachment: fixed; /* Optional: to keep the background fixed during scroll */
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Pulsating effect for the button */
+        button:active {
+            animation: pulsate 1s ease-out;
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .definition-container {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .definition {
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+        .iconlogo {
+            width: 100px; /* Adjust the size of the icon */
+            height: 100px; /* Adjust the size of the icon */
+        }
+    </style>
+</head>
+<body>
+    <div><img src="icon.png" class="iconlogo"></div>
+    <div class="container">
+        <h1>Dictionary Tool</h1>
+        <div class="input-container">
+            <input type="text" id="wordInput" placeholder="Enter a word" />
+            <button onclick="getDefinition()">Get Definition</button>
+        </div>
+        <div class="definition-container" id="definitionResults"></div>
+        <button class="home-button" onclick="goHome()">Home</button> <!-- Home Button -->
+    </div>
+
+    <script>
+        function getDefinition() {
+            const word = document.getElementById('wordInput').value.trim();
+
+            // Check if the input is empty
+            if (!word) {
+                alert("Please enter a word.");
+                return;
+            }
+
+            // Fetch definition from Free Dictionary API
+            const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+
+            // Make API request
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const definitionResults = document.getElementById('definitionResults');
+                    definitionResults.innerHTML = ''; // Clear previous results
+
+                    if (data.title === "No Definitions Found") {
+                        definitionResults.innerHTML = `<p class="error">No definition found for the word: "${word}".</p>`;
+                        return;
+                    }
+
+                    // Extract and display the definitions
+                    let resultHtml = `<h2>Definitions for "${word}":</h2>`;
+
+                    data[0].meanings.forEach(meaning => {
+                        resultHtml += `<div class="definition"><strong>${meaning.partOfSpeech}</strong>: ${meaning.definitions[0].definition}</div>`;
+                    });
+
+                    definitionResults.innerHTML = resultHtml;
+                })
+                .catch(error => {
+                    console.error("Error fetching the definition:", error);
+                    const definitionResults = document.getElementById('definitionResults');
+                    definitionResults.innerHTML = `<p class="error">Error fetching definition. Please try again later.</p>`;
+                });
+        }
+
+        // Function to go back to the previous page
+        function goHome() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
