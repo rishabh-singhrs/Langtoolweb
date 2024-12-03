@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synonym Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            background-image: url('gojo.png');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        button:active {
+            animation: pulsate 1s ease-out;
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .synonyms-container {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .synonym {
+            display: inline-block;
+            background-color: #e4f1e0;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .synonym:hover {
+            background-color: #b7dba8;
+        }
+        .home-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+        .iconlogo {
+            width: 100px; /* Adjust the size of the icon */
+            height: 100px; /* Adjust the size of the icon */
+        }
+
+    </style>
+</head>
+<body>
+    <div><img src="icon.png" class="iconlogo"></div>
+    <div class="container">
+        <h1>Synonym Finder</h1>
+        <div class="input-container">
+            <input type="text" id="wordInput" placeholder="Enter a word" />
+            <button onclick="getSynonyms()">Find Synonyms</button>
+        </div>
+        <div class="synonyms-container" id="synonymResults"></div>
+        <button class="home-button" onclick="goHome()">Home</button>
+    </div>
+
+    <script>
+        function getSynonyms() {
+            // Get the word input by the user
+            const word = document.getElementById('wordInput').value.trim();
+
+            // Check if the input is empty
+            if (!word) {
+                alert("Please enter a word.");
+                return;
+            }
+
+            // Use the Datamuse API to find synonyms
+            const apiUrl = `https://api.datamuse.com/words?rel_syn=${word}&max=10`;
+
+            // Fetch the synonyms from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Get the results container
+                    const synonymResults = document.getElementById('synonymResults');
+                    
+                    // Clear previous results
+                    synonymResults.innerHTML = '';
+
+                    // Check if there are synonyms available
+                    if (data.length === 0) {
+                        synonymResults.innerHTML = '<p>No synonyms found.</p>';
+                        return;
+                    }
+
+                    // Display the synonyms
+                    const synonymsList = data.map(item => {
+                        return `<span class="synonym">${item.word}</span>`;
+                    }).join(' ');
+
+                    synonymResults.innerHTML = synonymsList;
+                })
+                .catch(error => {
+                    console.error("Error fetching synonyms:", error);
+                    document.getElementById('synonymResults').innerHTML = '<p>Error fetching synonyms. Try again later.</p>';
+                });
+        }
+
+        function goHome() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
