@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Scramble Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div><img src="icon.png" class="iconlogo"></div>
+  <h1>Word Scramble Game</h1>
+  <div id="game-container">
+    <label for="input-word">Enter a word:</label>
+    <input type="text" id="input-word" placeholder="Enter a word to get synonyms">
+    <button id="fetch-synonyms-btn">Get Scrambled Words</button>
+
+    <p id="scrambled-word">Scrambled word will appear here</p>
+    
+    <input type="text" id="guess" placeholder="Unscramble the word">
+    <button id="submit-btn">Submit Guess</button>
+    
+    <p id="message"></p>
+    <p>Your Score: <span id="score">0</span></p>
+    <p id="hint"></p>
+    
+    <button id="restart-btn" class="hidden">Restart Game</button>
+    <button class="home-button" onclick="goHome()">Home</button>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
