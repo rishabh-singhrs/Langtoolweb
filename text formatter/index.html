@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Formatter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('gojo.png'); /* Add the background image */
+            background-size: cover;
+            background-position: center
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .input-text, .output-text {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 1.5;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Pulsating effect for the button */
+        button:active {
+            animation: pulsate 1s ease-out;
+        }
+
+        @keyframes pulsate {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+        .home-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+        .iconlogo {
+            width: 100px; /* Adjust the size of the icon */
+            height: 100px; /* Adjust the size of the icon */
+        }
+
+        .output-text {
+            background-color: #f0f0f0;
+            min-height: 100px;
+        }
+
+        .output-text pre {
+            white-space: pre-wrap;       /* To maintain formatting */
+            word-wrap: break-word;       /* To prevent text overflow */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div><img src="icon.png" class="iconlogo"></div>
+    <div class="container">
+        <h1>Text Formatter Tool</h1>
+        <div>
+            <label for="inputText">Input Text (Markdown or HTML)</label>
+            <textarea id="inputText" class="input-text" placeholder="Enter your text here"></textarea>
+        </div>
+        
+        <div class="button-container">
+            <button onclick="formatText('markdownToHtml')">Convert Markdown to HTML</button>
+            <button onclick="formatText('htmlToText')">Convert HTML to Plain Text</button>
+        </div>
+        
+        <div>
+            <label for="outputText">Output</label>
+            <textarea id="outputText" class="output-text" readonly placeholder="Formatted text will appear here"></textarea>
+        </div>
+        <button class="home-button" onclick="goHome()">Home</button>
+    </div>
+
+    <script>
+        function formatText(action) {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextArea = document.getElementById('outputText');
+            
+            if (action === 'markdownToHtml') {
+                // Convert Markdown to HTML using a simple library or logic
+                outputTextArea.value = markdownToHtml(inputText);
+            } else if (action === 'htmlToText') {
+                // Convert HTML to plain text
+                outputTextArea.value = htmlToPlainText(inputText);
+            }
+        }
+
+        // Convert Markdown to HTML
+        function markdownToHtml(markdown) {
+    // Convert headers
+    markdown = markdown.replace(/^###### (.*?)$/gm, '<h6>$1</h6>');
+    markdown = markdown.replace(/^##### (.*?)$/gm, '<h5>$1</h5>');
+    markdown = markdown.replace(/^#### (.*?)$/gm, '<h4>$1</h4>');
+    markdown = markdown.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+    markdown = markdown.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+    markdown = markdown.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+
+    // Convert bold text
+    markdown = markdown.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    markdown = markdown.replace(/\_(.*?)\_/g, '<strong>$1</strong>'); // Bold with underscores
+
+    // Convert italic text
+    markdown = markdown.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    markdown = markdown.replace(/\_(.*?)\_/g, '<em>$1</em>'); // Italic with underscores
+
+    // Convert links
+    markdown = markdown.replace(/\[([^\[]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2">$1</a>');
+
+    // Convert unordered lists
+    markdown = markdown.replace(/^\* (.*?)$/gm, '<ul><li>$1</li></ul>');
+
+    // Convert ordered lists
+    markdown = markdown.replace(/^\d+\. (.*?)$/gm, '<ol><li>$1</li></ol>');
+
+    // Convert blockquotes
+    markdown = markdown.replace(/^> (.*?)$/gm, '<blockquote>$1</blockquote>');
+
+    // Convert code blocks
+    markdown = markdown.replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>');
+
+    // Convert inline code
+    markdown = markdown.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Convert line breaks
+    markdown = markdown.replace(/\n/g, '<br>');
+
+    return markdown;
+}
+
+
+        // Convert HTML to Plain Text
+        function htmlToPlainText(html) {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            return doc.body.textContent || doc.body.innerText || '';
+        }
+
+        function goHome() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
