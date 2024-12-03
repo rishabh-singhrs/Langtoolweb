@@ -1,0 +1,203 @@
+/* Global Reset and Base Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;  /* Light background for the body */
+    background-image: url('gojo.png'); /* Add background image */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header Styling */
+header {
+    background-color: #1e1e1e;  /* Dark header */
+    color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.iconlogo {
+    width: 100px; /* Adjust the size of the icon */
+    height: 100px;
+}
+
+/* Main Content Layout */
+.container {
+    width: 80%;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.summarizer-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.summarizer-box, .summary-box {
+    background-color: #fff; /* Light background for the boxes */
+    border-radius: 8px;
+    width: 48%;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summarizer-box h3, .summary-box h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 150px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #81c784;  /* Accent color on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.button-container {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color:white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Pulsating effect for the button */
+button:active {
+    animation: pulsate 1s ease-out;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+/* Slider Controls */
+.controls {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="range"] {
+    width: 80%;
+    margin: 0 10px;
+    accent-color: #81c784;
+}
+
+#sliderValue {
+    font-weight: bold;
+    color: #81c784;
+}
+
+/* Text-to-Speech Controls */
+.tts-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .summarizer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .summarizer-box, .summary-box {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar h1 {
+        font-size: 24px;
+    }
+
+    .navbar p {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+
+    input[type="range"] {
+        width: 100%;
+    }
+}
+
+.home-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}

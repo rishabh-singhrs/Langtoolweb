@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextSummarize Pro - Business Text Summarization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div><img src="icon.png" class="iconlogo"></div>
+     <main>        
+        <div class="container">
+            <section class="summarizer-container">
+                <div class="summarizer-box">
+                    <h3>Enter Text to Summarize</h3>
+                    <textarea id="inputText" placeholder="Paste or type your text here..." rows="10"></textarea>
+                    <p>Input Word Count: <span id="inputWordCount">0</span> words</p>
+
+                    <div class="controls">
+                        <label for="sentenceSlider">Summary Length (sentences):</label>
+                        <input type="range" id="sentenceSlider" min="1" max="10" value="3">
+                        <span id="sliderValue">3</span>
+                    </div>
+
+                    <button onclick="generateSummary()">Generate Summary</button>
+                </div>
+
+                <div class="summary-box">
+                    <h3>Your Summary</h3>
+                    <p id="summaryResult"></p>
+                    <p>Summary Word Count: <span id="summaryWordCount">0</span> words</p>
+
+                    <!-- New controls for play, pause, and resume -->
+                    <div class="tts-controls">
+                        <button id="playButton" onclick="playSpeech()">Play</button>
+                        <button id="pauseButton" onclick="pauseSpeech()">Pause</button>
+                        <button id="resumeButton" onclick="resumeSpeech()">Resume</button>
+                    </div>
+                    <button class="home-button" onclick="goHome()">Home</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
