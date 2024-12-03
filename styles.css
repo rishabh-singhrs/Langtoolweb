@@ -1,0 +1,487 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:'Roboto';
+    background: url('gojo.png') no-repeat center center/cover; /* Apply background image to the entire page */
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+    height: 100%; /* Ensure body takes full height */
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(52, 152, 219, 0.6); /* Slight transparency */
+    padding: 6px 15px;
+    text-align: right;
+    z-index: 1000;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Pulsate on hover */
+.nav-btn:hover {
+    background-color: #1c6b8f;
+    transform: scale(1.1); /* Slight zoom on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.nav-btn:active {
+    background-color: #1a5575;
+}
+
+/* Homepage Section with Background Image */
+.homepage-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 40px;
+    position: relative;
+}
+
+/* Hero Section with Background Image */
+.hero {
+    position: relative;
+    height: 60vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4); /* Add slight dark overlay for text visibility */
+    background: url('sato.jpg')no-repeat center center/cover;
+}
+
+
+.hero-text {
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+}
+
+/* Extended Description */
+.extended-description {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.extended-description h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color:white;
+
+    text-shadow: horizontal-offset vertical-offset blur-radius color;
+      
+}
+
+/* Pulsate on hover */
+.extended-description h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.extended-description p {
+    font-size: 1.1rem;
+    color:white;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Language Tools Section */
+.tools {
+    padding: 40px;
+    background-color: rgba(236, 240, 241, 0.8);
+    text-align: center;
+    margin-top: 50px;
+}
+
+.ss {
+    padding: 10px;
+}
+
+.tools h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.tools h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.tool-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.tool-btn {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Pulsate on hover */
+.tool-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-5px); /* Move button up slightly on hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.tool-btn:active {
+    background-color: #1c6b8f;
+}
+
+/* Pricing Section */
+.pricing {
+    padding: 40px;
+    text-align: center;
+    background-color: rgba(236, 240, 241, 0.8);
+    margin-top: 50px;
+}
+
+.pricing h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.pricing h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.pricing-table {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.pricing-plan {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pulsate on hover */
+.pricing-plan:hover {
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.pricing-plan h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.pricing-plan p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.pricing-plan strong {
+    font-size: 1.5rem;
+    color: #e74c3c;
+}
+
+/* About Section */
+.about {
+    padding: 40px;
+    background-color: rgba(236, 240, 241, 0.8);
+    text-align: center;
+    margin-top: 50px;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.about h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.about p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Contact Section */
+.contact {
+    padding: 40px;
+    text-align: center;
+    background-color: rgba(236, 240, 241, 0.8);
+    margin-top: 50px;
+}
+
+.contact h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.contact h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.contact p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.iconlogo {
+    position: absolute;
+    top: 2px; /* Adjust the distance from the top */
+    left: 20px; /* Adjust the distance from the left */
+}
+
+.iconlogo {
+    width: 60px; /* Adjust the size of the icon */
+    height: 60px; /* Adjust the size of the icon */
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 40px;
+    background-color: rgba(236, 240, 241, 0.8);
+    text-align: center;
+    margin-top: 50px;
+}
+
+.testimonials h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.testimonials h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.testimonials .testimonial-card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Pulsate on hover */
+.testimonials .testimonial-card:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.testimonials .testimonial-card h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.testimonials .testimonial-card p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 40px;
+    background-color: rgba(236, 240, 241, 0.8);
+    text-align: center;
+    margin-top: 50px;
+}
+
+.faq h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Pulsate on hover */
+.faq h2:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.faq .faq-item {
+    background-color: #ecf0f1;
+    margin: 10px auto;
+    padding: 15px;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Pulsate on hover */
+.faq .faq-item:hover {
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.faq .faq-item h3 {
+    font-size: 1.4rem;
+    color: #2980b9;
+    margin-bottom: 10px;
+}
+
+.faq .faq-item p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+}
+
+/* Keyframe Animations */
+
+/* Pulse effect */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/*sample card*/
+/* Basic card button styling */
+.card-button {
+    position: relative;
+    width: 250px; /* Define the card's width */
+    padding: 20px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    will-change: transform, box-shadow, background-color;
+}
+
+/* Hover animation - card lift effect */
+.card-button:hover {
+    transform: translateY(-10px) rotate(5deg); /* Slight lift with rotation */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+    background-color: #f5f5f5; /* Subtle background color change on hover */
+}
+
+/* Hover text effects - Change title and description color */
+.card-button:hover h4 {
+    color: #4CAF50; /* Change title color on hover */
+    transform: translateY(-5px); /* Slight upward movement */
+    transition: all 0.3s ease;
+}
+
+.card-button:hover p {
+    color: #666; /* Darken description text on hover */
+    transform: translateY(5px); /* Slight downward movement */
+    transition: all 0.3s ease;
+}
+
+/* Card content styling (image, title, description) */
+.card-button img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Scale image slightly on hover */
+.card-button:hover img {
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Title styling */
+.card-button h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Description styling */
+.card-button p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+/* Animation on card load for a smooth entrance effect */
+.card-button {
+    animation: cardFadeIn 0.5s ease-out;
+}
+
+/* Card fade-in animation */
+@keyframes cardFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Styling for Smaller Screens */
+@media (max-width: 600px) {
+    .card-button {
+        width: 100%;
+        margin: 10px;
+    }
+}

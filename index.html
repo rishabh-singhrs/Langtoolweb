@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Tools Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar with Home, Pricing, Contact, About buttons -->
+    <nav class="navbar">
+        <img src="icon.png" class="iconlogo">
+        <button class="nav-btn" onclick="scrollToSection('home')">Home</button>
+        <button class="nav-btn" onclick="scrollToSection('pricing')">Pricing</button>
+        <button class="nav-btn" onclick="scrollToSection('about')">About</button>
+        <button class="nav-btn" onclick="scrollToSection('tools')">Language Tools</button>
+        <button class="nav-btn" onclick="scrollToSection('contact')">Contact</button>
+    </nav>
+
+    <!-- Homepage Section with Background Image -->
+    <div class="homepage-container" id="home">
+        
+        <div class="hero">
+            
+            <div class="hero-text">
+                
+                <h1>Welcome to Language Tools</h1>
+                <p>Enhance your writing skills with our amazing language tools!</p>
+            </div>
+        </div>
+
+        <!-- Extended Description Section -->
+        <div class="extended-description">
+            <h2>Discover the Power of Language</h2>
+            <p>
+                Language has been the foundation of human communication for thousands of years. From the ancient cuneiform script of Mesopotamia to modern-day digital communication, language has allowed us to share ideas, emotions, and knowledge. 
+                At our platform, we believe that mastering language is the key to success in all aspects of life. That's why we've created a suite of tools designed to help you master language in ways you never thought possible.
+            </p>
+            <p>
+                Whether you're writing an email, preparing a speech, or crafting a novel, our tools will help you refine your words and elevate your communication. Our advanced algorithms analyze your text and provide suggestions that are tailored to your unique writing style. 
+                From grammar checks to summarization, synonym suggestions, and more, you’ll never have to worry about your writing again!
+            </p>
+        </div>
+
+        <!-- Language Tools Section -->
+        <div class="tools" id="tools">
+            <h2>Our Language Tools</h2>
+            <p class="ss">Explore the amazing tools we have to help you with writing, summarizing, grammar correction, and more!</p>
+            <div class="tool-buttons">
+                <button class="card-button" onclick="location.href='bettergrammerchecker/index.html'"><img src="grammer checker.png"><h4>Grammar Checker</h4></button>
+                <button class="card-button" onclick="window.location.href='text formatter/index.html'"><img src="textformatter.jpg"><h4>Text Formatter</h4></button>
+                <button class="card-button" onclick="window.location.href='summarizer/index.html'"><img src="Summary.png"><h4>Summarizer</h4></button>
+                <button class="card-button" onclick="window.location.href='synonym finder/index.html'"><img src="synonym.jpg"><h4>Synonym Finder</h4></button>
+                <button class="card-button" onclick="window.location.href='dictionary/index.html'"><img src="dictionary.png"><h4>Dictionary</h4></button>
+                <button class="card-button" onclick="window.location.href='scrambled words/index.html'"><img src="scrambledwords.png"><h4>Scrambled</h4></button>
+                <button class="card-button" onclick="window.location.href='youtubetranscript/index.html'"><img src="yutu.jpg"><h4>YoutubeTranscript</h4></button>
+            </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="pricing" id="pricing">
+            <h2>Our Pricing Plans</h2>
+            <p>We offer unbeatable pricing for all of our tools. Get access to premium features that will truly transform your writing!</p>
+            <div class="pricing-table">
+                <div class="pricing-plan">
+                    <h3>Basic Plan</h3>
+                    <p>Free forever! Get access to all the basic features to check your grammar and more.</p>
+                    <p><strong>$0</strong></p>
+                </div>
+                <div class="pricing-plan">
+                    <h3>Premium Plan</h3>
+                    <p>Unlock all advanced features like AI-based suggestions, unlimited usage, and more!</p>
+                    <p><strong>$29.99/month</strong></p>
+                </div>
+                <div class="pricing-plan">
+                    <h3>Ultimate Plan</h3>
+                    <p>For serious writers. Get everything plus priority support, dedicated tools, and more.</p>
+                    <p><strong>$99.99/month</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about" id="about">
+            <h2>About Us</h2>
+            <p>
+                LanguageTools was created with a simple mission: to help individuals, businesses, and students communicate better. We know how powerful words can be, and we want to empower you to use them effectively.
+            </p>
+            <p>
+                Our team consists of linguists, developers, and data scientists who have worked tirelessly to build tools that improve clarity, precision, and efficiency. From the earliest stages of written language to today’s digital text, our technology is rooted in understanding the way we communicate. 
+                We provide accurate, real-time assistance to help people write better—whether it's for academic, professional, or personal purposes.
+            </p>
+            <p>
+                Join the millions of people who have already transformed their writing experience with our powerful language tools. Say goodbye to the frustration of poor grammar, unclear writing, and wasted time. It’s time to communicate more clearly and effectively!
+            </p>
+        </div>
+
+
+        <!-- Testimonials Section -->
+<div class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-card">
+        <h3>John Doe</h3>
+        <p>"This tool has made my life so much easier! I no longer have to worry about making grammatical errors in my writing. It's fast and reliable!"</p>
+    </div>
+    <div class="testimonial-card">
+        <h3>Jane Smith</h3>
+        <p>"I love the summarizer tool! It saves me hours of time by summarizing large texts in seconds. Highly recommend it!"</p>
+    </div>
+    <div class="testimonial-card">
+        <h3>Mark Brown</h3>
+        <p>"The grammar checker is a game-changer. It catches errors I didn't even know existed. A must-have for any writer."</p>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <h3>How do I use the grammar checker?</h3>
+        <p>Simply paste your text into the grammar checker tool and click the "Check Grammar" button. The tool will highlight errors and suggest corrections.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Is there a limit to the length of text I can summarize?</h3>
+        <p>No, you can summarize as much text as you want. However, for best results, try to keep the text within a few paragraphs.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Are there any premium features?</h3>
+        <p>Yes! Premium features include advanced grammar checks, more powerful summarization, and unlimited access to all the tools.</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+        <!-- Contact Section -->
+        <div class="contact" id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feel free to reach out to us! Our support team is here to help.</p>
+            <p>Email: support@languagetools.com</p>
+            <p>Phone: +917081830732</p>
+            <p>Address: BH2 AKGEC</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
